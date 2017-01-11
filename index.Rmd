@@ -65,6 +65,18 @@ one_sensor[-c(1:100),] %>%
   knitr::kable()
 ```
 
+## Streaming Data from the Urban Observatory
+
+```{r, echo=FALSE}
+one_sensor %>%
+  ggplot(aes(x = timestamp, y = value, colour = reading)) +
+  geom_line() +
+  facet_wrap(~reading, ncol = 1, scales = "free_y") +
+  theme(legend.position = "none") +
+  scale_x_datetime(labels = date_format("%a %d-%m-%y"))
+```
+
+
 ## Univariate Online Analysis: POMP Model
 
 <div align="center">![POMP Model](state_space_model.png)</div>
@@ -79,20 +91,14 @@ one_sensor[-c(1:100),] %>%
 > - Determine the state, $X_1,\dots,X_k$, given observations, $y_1,\dots,y_k$
 > - Batch algorithms, such as MCMC determine the joint posterior, $p(X_1,\dots,X_k|y_1,\dots,y_k)$
 > - If a new observation arrives at time $t = k+1$, the MCMC must be re-run
+> - Sequential Monte Carlo methods can be used to estimate the filtering distribution (and parameters) online
 
 ## Scalable Inference for POMP Models
 
-> - Sequential Monte Carlo (SMC) methods are scalable:
-> - The posterior $p(X_k|y_1,\dots,y_k)$ is represented by a collection of particles
-> - This posterior can be used to calculate $p(X_{k+1}|y_1,\dots,y_k,y_{k+1})$
+* Sequential Monte Carlo (SMC) methods are scalable
+* Can be used to calculate the state and parameters online
 
-> - <div align="center">![Particle Filter](Figures/animatedParticleFilter.gif)</div>
-  
-## Online Parameter Inference
-
-> - Lui and West Algorithm
-> - Storvik Algorithm
-> - Particle Learning
+<div align="center">![Particle Filter](Figures/animatedParticleFilter.gif)</div>
 
 # Modelling Related Processes
 
@@ -103,11 +109,11 @@ one_sensor %>%
   filter(reading %in% c("Humidity", "Temperature")) %>%
   ggplot(aes(x = timestamp, y = value)) +
   geom_line() +
-  scale_x_datetime(labels = date_format("%a %d %m")) +
+  scale_x_datetime(labels = date_format("%a %H:%M")) +
   facet_wrap(~reading, ncol = 1, scales = "free_y")
 ```
 
-## SUTSE: Seamingly Unrelated Time Series
+## Modelling Related Time Series
 
 $$\begin{align*}
 \textbf{Y}(t_i)|\textbf{x}(t_i)) &\sim \pi(\textbf{Y}(t_i)|\textbf{x}(t_i)) \\
@@ -118,8 +124,22 @@ $$\begin{align*}
 > - The observation distribution is now multivariate
 > - Dependence between time series can be induced by having non-diagonal observation variance-covariance matrices
 
+## Functional Programming in Scala: Advantages
+
+> - Referentially transparent functions
+> - Function composition
+> - Futures and Streams for efficient asynchronous programming
+> - Higher order abstractions (Functors, Applicatives, Monads etc) enabling greater level of code reuse
+> - Property Based Testing
+> - Runs on the JVM - access to Java librarys, deploy everywhere
+> - Fully Features dependency management and build tool (SBT)
+> - Mature statistical and numerical computing libraries (Breeze, Spire)
+
 ## Summary
 
+### What I've done so far
+* Made a library for inference of Composable Univariate POMP models: [git.io/statespace](https://git.io/statespace)
+
+### Further Work
 * Extend POMP models to multivariate (heterogeneous) observations
 * Scalable, online inference for multivariate POMP models
-

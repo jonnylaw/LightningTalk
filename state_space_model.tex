@@ -7,17 +7,19 @@
 \begin{tikzpicture}[node distance=3cm, thick, scale = 0.5]
 
 % States
-\node (X1) {$X_1$};
-\node (X2) [right of=X1] {$X_2$};
-\node (X3) [right of=X2] {$X_3$};
+\node (X0) {$\dots$};
+\node (X1) [right of=X0] {$X(t_1)$};
+\node (X2) [right of=X1] {$X(t_2)$};
+\node (X3) [right of=X2] {$X(t_3)$};
 \node (X4) [right of=X3] {$\dots$};
 
 % Observations
-\node (Y1) [below of=X1] {$Y_1$};
-\node (Y2) [below of=X2] {$Y_2$};
-\node (Y3) [below of=X3] {$Y_3$};
+\node (Y1) [below of=X1] {$Y(t_1)$};
+\node (Y2) [below of=X2] {$Y(t_2)$};
+\node (Y3) [below of=X3] {$Y(t_3)$};
 
 % Draw edges 
+\path [line] (X0) -- (X1);
 \path [line] (X1) -- (X2);
 \path [line] (X2) -- (X3);
 \path [line] (X3) -- (X4);
@@ -26,11 +28,11 @@
 \path [line] (X3) -- (Y3);
 
 % label arrows
-\node [above right=0.1cm and -0.1cm of X1, node distance=1.5cm] {$p(X_2|X_1 = x_1)$};
-\node [above right=0.1cm and -0.1cm of X2, node distance=1.5cm] {$p(X_3|X_2 = x_2)$};
-\node [rectangle, below of=X1, node distance=1.5cm, fill=white] {$\pi(Y_1|X_1 = x_1)$};
-\node [rectangle, below of=X2, node distance=1.5cm, fill=white] {$\pi(Y_2|X_2 = x_2)$};
-\node [rectangle, below of=X3, node distance=1.5cm, fill=white] {$\pi(Y_3|X_3 = x_3)$};
+\node [above right=0.1cm and -0.1cm of X1, node distance=1.5cm] {$p(X(t_2)|x(t_1))$};
+\node [above right=0.1cm and -0.1cm of X2, node distance=1.5cm] {$p(X(t_3)|x(t_2))$};
+\node [rectangle, below of=X1, node distance=1.5cm, fill=white] {$\pi(Y(t_1)|x(t_1))$};
+\node [rectangle, below of=X2, node distance=1.5cm, fill=white] {$\pi(Y(t_2)|x(t_2))$};
+\node [rectangle, below of=X3, node distance=1.5cm, fill=white] {$\pi(Y(t_3)|x(t_3))$};
 \end{tikzpicture}
 
 \end{document}
