@@ -1,6 +1,6 @@
 ---
 title: "Scalable Bayesian Inference for Streaming Data"
-author: "Jonathan Law"
+author: "Jonathan Law, Supervisor: Darren Wilkinson"
 date: "12th January 2017"
 autosize: true
 output: 
