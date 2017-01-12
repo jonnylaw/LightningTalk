@@ -89,7 +89,7 @@ one_sensor %>%
 ## Inference for POMP Models
 
 > - Determine the state, $X_1,\dots,X_k$, given observations, $y_1,\dots,y_k$
-> - Batch algorithms, such as MCMC determine the joint posterior, $p(X_1,\dots,X_k|y_1,\dots,y_k)$
+> - Batch algorithms, such as MCMC determine the posterior distribution of the state given observations
 > - If a new observation arrives at time $t = k+1$, the MCMC must be re-run
 > - Sequential Monte Carlo methods can be used to estimate the filtering distribution (and parameters) online
 
